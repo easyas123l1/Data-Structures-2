@@ -9,6 +9,7 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+from collections import deque
 
 
 class BinarySearchTree:
@@ -64,7 +65,7 @@ class BinarySearchTree:
         # Return the maximum value found in the tree
     def get_max(self):
         current = self
-        while current.right != None:
+        while current.right is not None:
             current = current.right
         return current.value
 
@@ -101,17 +102,42 @@ class BinarySearchTree:
         # Hint:  Use a recursive, depth first traversal
 
     def in_order_print(self, node):
-        pass
+        print(node.value)
+        if node.left is not None:
+            node.left.in_order_print(node.left)
+        if node.right is not None:
+            node.right.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
     def bft_print(self, node):
-        pass
+        q = deque()
+        q.append(node)
+
+        while len(q) > 0:
+            next_node = q.popleft()
+            print(next_node.value)
+
+            if next_node.left is not None:
+                q.append(next_node.left)
+            if next_node.right is not None:
+                q.append(next_node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        s = deque()
+        s.append(node)
+
+        while len(s) > 0:
+            current_node = s.pop()
+            print(current_node.value)
+
+            if current_node.left is not None:
+                s.appendleft(current_node.left)
+            if current_node.right is not None:
+                s.appendleft(current_node.right)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -130,6 +156,12 @@ def printing(node):
 
 
 bst = BinarySearchTree(5)
+bst.insert(8)
+bst.insert(1)
 bst.insert(2)
+bst.insert(3)
+bst.insert(4)
+bst.insert(6)
+bst.insert(7)
 bst.for_each(printing)
-print('bst', bst.left.value)
+bst.in_order_print
