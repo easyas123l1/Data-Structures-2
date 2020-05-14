@@ -71,7 +71,6 @@ class BinarySearchTree:
         # Call the function `fn` on the value of each node
 
     def for_each(self, fn):
-        pass
         # array to hold all nodes on the right to come back to
         # rights = []
         # current = self
@@ -87,13 +86,20 @@ class BinarySearchTree:
         #         current = rights.pop(0)
 
         # current = self
-        # fn(current.value)
-        # current = self
-        # print(current.value)
-        # if current.left is not None or current.right is not None:
-        #     fn(current.value)
-        #     self.for_each(current.left)
-        #     self.for_each(current.right)
+        # QUESTION IS IT NOT POSSIBLE TO RECURSE WITHOUT HELPER?
+        current = self
+        print('90', current.value)
+        print(current.left.value)
+        print(current.right)
+        fn(current.value)
+        if current.left is not None:
+            current = current.left
+            print('96', current.value)
+            self.for_each(current)
+
+        if current.right is not None:
+            self.for_each(current.right)
+
         # Part 2 -----------------------
 
         # Print all the values in order from low to high
@@ -125,7 +131,7 @@ class BinarySearchTree:
 
 
 def printing(node):
-    print('node', node.value)
+    print('node', node)
 
 
 bst = BinarySearchTree(5)
